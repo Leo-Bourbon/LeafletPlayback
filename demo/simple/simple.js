@@ -1,4 +1,4 @@
-$(function() {
+window.addEventListener("DOMContentLoaded", function() {
 
   //creates a new map
   var map = new L.Map('map');

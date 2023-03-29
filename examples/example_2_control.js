@@ -1,7 +1,6 @@
 L.Playback = L.Playback || {};
 
 L.Playback.Control = L.Control.extend({
-
   _html: 
 '<footer class="lp">' +
 '  <div class="transport">' +
@@ -75,7 +74,7 @@ L.Playback.Control = L.Control.extend({
 
   onAdd: function(map) {
     var html = this._html;
-    $('#map').after(html);
+    document.querySelector('#map').after(html);
     this._setup();
 
     // just an empty container

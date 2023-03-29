@@ -11,7 +11,18 @@
     "type": "git",
     "url": "git@github.com:Leo-Bourbon/LeafletPlayback.git"
   },
+  "main": "dist/LeafletPlayback.js",
   "dependencies": {
     "leaflet": "^1.9.3"
-  }
+  },
+  "directories": {
+    "data": "data/",
+    "examples": "examples/",
+    "lib": "src/"
+  },
+  "files": [
+    "dist/*",
+    "data/*",
+    "examples/*"
+  ]
 }
