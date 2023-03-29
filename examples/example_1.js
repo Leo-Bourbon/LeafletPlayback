@@ -8,18 +8,18 @@ $(function() {
 
     // Set timeline options
     var timelineOptions = {
-      "width":  "100%",
-      "height": "120px",
-      "style": "box",
-      "axisOnTop": true,
-      "showCustomTime":true
+      width:  "100%",
+      height: 120,
+      type: "box",
+      orientation: "top",
+      showCurrentTime:true
     };
     
     // Setup timeline
     var timeline = new vis.Timeline(document.getElementById('timeline'), timelineData, timelineOptions);
         
     // Set custom time marker (blue)
-    timeline.setCustomTime(startTime);
+    timeline.setCurrentTime(startTime);
 
     // Setup leaflet map
     var map = new L.Map('map');
@@ -83,15 +83,15 @@ $(function() {
     //playback.setData(blueMountain);    
     
     // Set timeline time change event, so cursor is set after moving custom time (blue)
-    timeline.on('timechange', onCustomTimeChange);    
+    timeline.on('timechange', onCurrentTimeChange);    
 
     // A callback so timeline is set after changing playback time
     function onPlaybackTimeChange (ms) {
-        timeline.setCustomTime(new Date(ms));
+        timeline.setCurrentTime(new Date(ms));
     };
     
     // 
-    function onCustomTimeChange(properties) {
+    function onCurrentTimeChange(properties) {
         if (!playback.isPlaying()) {
             playback.setCursor(properties.time.getTime());
         }        
