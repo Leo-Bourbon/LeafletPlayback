@@ -5,7 +5,11 @@ declare module "leaflet" {
   namespace Playback {
     // Clock.js
     class Clock extends L.Class {
-      constructor(trackController?: any, callback?: any, options?: any);
+      constructor(
+        trackController?: L.Playback.TrackController,
+        callback?: any,
+        options?: any
+      );
 
       addCallback(
         fn: (...args: any) => any
@@ -28,15 +32,15 @@ declare module "leaflet" {
       timeFormatFn: string;
     }
     class DateControl extends L.Control {
-      constructor(playback?: any, options?: DateControlOptions);
+      constructor(playback?: L.Playback, options?: DateControlOptions);
     }
 
     class PlayControl extends L.Control {
-      constructor(playback?: any);
+      constructor(playback?: L.Playback);
     }
 
     class SliderControl extends L.Control {
-      constructor(playback?: any);
+      constructor(playback?: L.Playback);
     }
 
     // MoveableMarker.js
@@ -49,10 +53,16 @@ declare module "leaflet" {
       getTooltip?(featureData: geojson.Feature): string;
       tooltipOptions?: L.TooltipOptions;
     }
+    type MoveableMarkerOptionsInit =
+      | MoveableMarkerOptions
+      | ((
+          feature: L.GeoJSON<geojson.Feature, any>
+        ) => L.Playback.MoveableMarkerOptions);
+
     class MoveableMarker extends L.Marker {
       constructor(
         startLatLng: L.LatLngExpression,
-        options: MoveableMarkerOptions,
+        options: MoveableMarkerOptionsInit,
         feature: geojson.Feature
       );
       getPopupContent(): string | null;
@@ -135,8 +145,8 @@ declare module "leaflet" {
     dateControl: boolean;
     sliderControl: boolean;
     // options
-    layer: any;
-    marker: any;
+    layer: (feature: geojson.Feature) => L.LayerOptions;
+    marker: L.Playback.MoveableMarkerOptionsInit;
   }
 
   class PlaybackClass extends L.Playback.Clock {
@@ -154,7 +164,7 @@ declare module "leaflet" {
     constructor(
       map: L.Map,
       geoJSON: L.GeoJSON,
-      callback: any,
+      callback: (...args: any) => any,
       options: PlaybackOptions
     );
 
@@ -170,7 +180,7 @@ declare module "leaflet" {
   function playback(
     map: L.Map,
     geoJSON: L.GeoJSON,
-    callback: any,
+    callback: (...args: any) => any,
     options: PlaybackOptions
   ): Playback;
 }

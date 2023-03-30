@@ -1,19 +1,27 @@
 {
-  "name": "LeafletPlayback",
+  "name": "leaflet-playback",
   "version": "0.2.2",
   "author": "Nicholas Hallahan <nick@theoutpost.io>",
   "contributors": [
     "Marius Bieliauskas <@recallfx>"
   ],
-  "description": "This is a Leaflet plug-in that plays back points that have a time stamp synchronized to a clock.",
+  "description": "This is a Leaflet plug-in that plays back points that have a time stamp synchronized to a clock. This is a fork trying to modernize this plugin.",
   "homepage": "http://leafletplayback.theoutpost.io/",
   "repository": {
     "type": "git",
     "url": "git@github.com:Leo-Bourbon/LeafletPlayback.git"
   },
-  "main": "dist/LeafletPlayback.js",
+  "main": "./dist/leaflet-playback.js",
+  "typings": "./src/index.d.ts",
   "dependencies": {
     "leaflet": "^1.9.3"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.10",
+    "@types/leaflet": "^1.9.3",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.37.0"
   },
   "directories": {
     "data": "data/",
