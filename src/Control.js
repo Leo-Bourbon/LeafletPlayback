@@ -36,8 +36,8 @@ L.Playback.DateControl = L.Control.extend({
 
     // setup callback
     playback.addCallback((ms) => {
-      this._date.innerHTML = self.options.dateFormatFn(ms);
-      this._time.innerHTML = self.options.timeFormatFn(ms);
+      this._date.innerHTML = this.options.dateFormatFn(ms);
+      this._time.innerHTML = this.options.timeFormatFn(ms);
     });
 
     return this._container;
