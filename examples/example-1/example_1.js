@@ -1,17 +1,19 @@
+/// <reference types="../src/index.d.ts" />
+/* global demoTracks, vis */
 window.addEventListener("DOMContentLoaded", function () {
   // Get start/end times
-  var startTime = new Date(demoTracks[0].properties.time[0]);
-  var endTime = new Date(
+  const startTime = new Date(demoTracks[0].properties.time[0]);
+  const endTime = new Date(
     demoTracks[0].properties.time[demoTracks[0].properties.time.length - 1]
   );
 
   // Create a DataSet with data
-  var timelineData = new vis.DataSet([
+  const timelineData = new vis.DataSet([
     { start: startTime, end: endTime, content: "Demo GPS Tracks" },
   ]);
 
   // Set timeline options
-  var timelineOptions = {
+  const timelineOptions = {
     width: "100%",
     height: 120,
     type: "box",
@@ -20,7 +22,7 @@ window.addEventListener("DOMContentLoaded", function () {
   };
 
   // Setup timeline
-  var timeline = new vis.Timeline(
+  const timeline = new vis.Timeline(
     document.getElementById("timeline"),
     timelineData,
     timelineOptions
@@ -30,9 +32,9 @@ window.addEventListener("DOMContentLoaded", function () {
   timeline.setCurrentTime(startTime);
 
   // Setup leaflet map
-  var map = new L.Map("map");
+  const map = new L.Map("map");
 
-  var basemapLayer = new L.TileLayer(
+  const basemapLayer = new L.TileLayer(
     "https://{s}.tile.osm.org/{z}/{x}/{y}.png"
   );
 
@@ -47,14 +49,14 @@ window.addEventListener("DOMContentLoaded", function () {
   // =====================================================
 
   // Playback options
-  var playbackOptions = {
+  const playbackOptions = {
     playControl: true,
     dateControl: true,
 
     // layer and marker options
     layer: {
       pointToLayer: function (featureData, latlng) {
-        var result = {};
+        let result = {};
 
         if (
           featureData &&
@@ -74,7 +76,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     marker: {
       getPopup: function (featureData) {
-        var result = "";
+        let result = "";
 
         if (
           featureData &&
@@ -90,7 +92,7 @@ window.addEventListener("DOMContentLoaded", function () {
   };
 
   // Initialize playback
-  var playback = new L.Playback(
+  const playback = new L.Playback(
     map,
     null,
     onPlaybackTimeChange,
