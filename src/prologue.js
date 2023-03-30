@@ -1,5 +1,6 @@
 // UMD initialization to work with CommonJS, AMD and basic browser script include
 (function (factory) {
+		// eslint-disable-next-line no-var
 	var L;
 	if (typeof define === 'function' && define.amd) {
 		// AMD

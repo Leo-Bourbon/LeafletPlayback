@@ -1,7 +1,6 @@
 L.Playback = L.Playback || {};
 
 L.Playback.Clock = L.Class.extend({
-
   initialize: function (trackController, callback, options) {
     this._trackController = trackController;
     this._callbacksArry = [];
@@ -23,23 +22,24 @@ L.Playback.Clock = L.Class.extend({
     self._cursor += self._tickLen;
   },
 
-  _callbacks: function(cursor) {
-    var arry = this._callbacksArry;
-    for (var i=0, len=arry.length; i<len; i++) {
+  _callbacks: function (cursor) {
+    const arry = this._callbacksArry;
+    for (let i = 0, len = arry.length; i < len; i++) {
       arry[i](cursor);
     }
   },
 
-  addCallback: function(fn) {
+  addCallback: function (fn) {
     this._callbacksArry.push(fn);
   },
 
   start: function () {
     if (this._intervalID) return;
     this._intervalID = window.setInterval(
-      this._tick, 
-      this._transitionTime, 
-      this);
+      this._tick,
+      this._transitionTime,
+      this
+    );
   },
 
   stop: function () {
@@ -48,11 +48,11 @@ L.Playback.Clock = L.Class.extend({
     this._intervalID = null;
   },
 
-  getSpeed: function() {
+  getSpeed: function () {
     return this._speed;
   },
 
-  isPlaying: function() {
+  isPlaying: function () {
     return this._intervalID ? true : false;
   },
 
@@ -66,9 +66,9 @@ L.Playback.Clock = L.Class.extend({
   },
 
   setCursor: function (ms) {
-    var time = parseInt(ms);
+    let time = parseInt(ms);
     if (!time) return;
-    var mod = time % this._tickLen;
+    const mod = time % this._tickLen;
     if (mod !== 0) {
       time += this._tickLen - mod;
     }
@@ -77,20 +77,19 @@ L.Playback.Clock = L.Class.extend({
     this._callbacks(this._cursor);
   },
 
-  getTime: function() {
+  getTime: function () {
     return this._cursor;
   },
 
-  getStartTime: function() {
+  getStartTime: function () {
     return this._trackController.getStartTime();
   },
 
-  getEndTime: function() {
+  getEndTime: function () {
     return this._trackController.getEndTime();
   },
 
-  getTickLen: function() {
+  getTickLen: function () {
     return this._tickLen;
-  }
-
+  },
 });

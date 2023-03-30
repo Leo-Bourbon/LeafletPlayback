@@ -7,13 +7,13 @@ L.Playback.Util = L.Class.extend({
     },
 
     TimeStr: function (time) {
-      var d = new Date(time);
-      var h = d.getHours();
-      var m = d.getMinutes();
-      var s = d.getSeconds();
-      var tms = time / 1000;
-      var dec = (tms - Math.floor(tms)).toFixed(2).slice(1);
-      var mer = "AM";
+      const d = new Date(time);
+      let h = d.getHours();
+      let m = d.getMinutes();
+      let s = d.getSeconds();
+      const tms = time / 1000;
+      const dec = (tms - Math.floor(tms)).toFixed(2).slice(1);
+      let mer = "AM";
       if (h > 11) {
         h %= 12;
         mer = "PM";
@@ -25,22 +25,22 @@ L.Playback.Util = L.Class.extend({
     },
 
     ParseGPX: function (gpx) {
-      var geojsonRoot = {
+      const geojsonRoot = {
         type: "FeatureCollection",
         features: [],
       };
 
-      var parser = new DOMParser();
-      var xml = parser.parseFromString(gpx, "text/xml");
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(gpx, "text/xml");
 
-      var trks = xml.getElementsByTagName("trk");
+      const trks = xml.getElementsByTagName("trk");
       for (
-        var trackIdx = 0, numberOfTracks = trks.length;
+        let trackIdx = 0, numberOfTracks = trks.length;
         trackIdx < numberOfTracks;
         trackIdx++
       ) {
-        var track = trks[trackIdx];
-        var geojson = {
+        const track = trks[trackIdx];
+        const geojson = {
           type: "Feature",
           geometry: {
             type: "MultiPoint",
@@ -70,24 +70,24 @@ L.Playback.Util = L.Class.extend({
             track.getElementsByTagName("src")[0].textContent;
         }
 
-        var pts = track.getElementsByTagName("trkpt");
-        for (var i = 0, len = pts.length; i < len; i++) {
-          var p = pts[i];
-          var lat = parseFloat(p.getAttribute("lat"));
-          var lng = parseFloat(p.getAttribute("lon"));
-          var timeStr = p.getElementsByTagName("time")[0].textContent;
-          var eleStr =
+        const pts = track.getElementsByTagName("trkpt");
+        for (let i = 0, len = pts.length; i < len; i++) {
+          const p = pts[i];
+          const lat = parseFloat(p.getAttribute("lat"));
+          const lng = parseFloat(p.getAttribute("lon"));
+          const timeStr = p.getElementsByTagName("time")[0].textContent;
+          const eleStr =
             p.getElementsByTagName("ele")[0] !== undefined
               ? p.getElementsByTagName("ele")[0].textContent
               : null;
-          var t = new Date(timeStr).getTime();
-          var ele = parseFloat(eleStr);
+          const t = new Date(timeStr).getTime();
+          const ele = parseFloat(eleStr);
 
-          var coords = geojson.geometry.coordinates;
-          var props = geojson.properties;
+          const coords = geojson.geometry.coordinates;
+          const props = geojson.properties;
 
-          var time = props.time;
-          var altitude = geojson.properties.altitude;
+          const time = props.time;
+          const altitude = geojson.properties.altitude;
 
           coords.push([lng, lat]);
           time.push(t);
