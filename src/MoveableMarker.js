@@ -2,11 +2,10 @@ L.Playback = L.Playback || {};
 
 L.Playback.MoveableMarker = L.Marker.extend({
   initialize: function (startLatLng, options, feature) {
-    const marker_options_func = options.marker || {};
+    let marker_options = options.marker || {};
 
-    let marker_options = {};
-    if (marker_options_func instanceof Function) {
-      marker_options = marker_options_func(feature);
+    if (marker_options instanceof Function) {
+      marker_options = marker_options(feature);
     }
 
     L.Marker.prototype.initialize.call(this, startLatLng, marker_options);
@@ -17,11 +16,11 @@ L.Playback.MoveableMarker = L.Marker.extend({
     this.tooltipOptions = {};
     this.feature = feature;
 
-    if (options.getPopup) {
-      this.popupContent = options.getPopup(feature);
+    if (marker_options.getPopup) {
+      this.popupContent = marker_options.getPopup(feature);
     }
 
-    if (options.getTooltip) {
+    if (marker_options.getTooltip) {
       this.tooltipContent = marker_options.getTooltip(feature);
     }
 
