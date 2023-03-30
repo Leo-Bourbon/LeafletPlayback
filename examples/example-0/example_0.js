@@ -1,8 +1,10 @@
+/// <reference types="../src/index.d.ts" />
+/* global demoTracks */
 window.addEventListener("DOMContentLoaded", function () {
   // Setup leaflet map
-  var map = new L.Map("map");
+  const map = new L.Map("map");
 
-  var basemapLayer = new L.TileLayer(
+  const basemapLayer = new L.TileLayer(
     "https://{s}.tile.osm.org/{z}/{x}/{y}.png"
   );
 
@@ -17,12 +19,21 @@ window.addEventListener("DOMContentLoaded", function () {
   // =====================================================
 
   // Playback options
-  var playbackOptions = {
+  /**
+   * @type { L.PlaybackOptions }
+   */
+  const playbackOptions = {
     playControl: true,
     dateControl: true,
     sliderControl: true,
+    marker: (feature) => {
+      return {
+        popups: true,
+        tooltips: true,
+      };
+    },
   };
 
   // Initialize playback
-  var playback = new L.Playback(map, demoTracks, null, playbackOptions);
+  const playback = new L.Playback(map, demoTracks, null, playbackOptions);
 });
